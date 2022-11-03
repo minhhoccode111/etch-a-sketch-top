@@ -1,0 +1,107 @@
+/* variables color */
+:root {
+  --dark: rgb(41, 33, 33);
+  --light: rgb(255, 191, 73);
+}
+/* reset css */
+*,
+::after,
+::before {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+  list-style-type: none;
+  text-decoration: none;
+  box-sizing: border-box;
+  color: var(--light);
+  border-color: var(--light);
+}
+
+/* gradient backgroundColor */
+.gradient-background {
+  background: linear-gradient(216deg, #1ac326, #2f4e2c, #707ec0, #7c950d);
+  background-size: 240% 240%;
+  animation: gradient-animation 40s ease infinite;
+}
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+/* gradient backgroundColor */
+html {
+  font: small-caps normal normal 10px/1.5 Arial, sans-serif;
+}
+body {
+  font-size: 1.8rem;
+  /* overflow: hidden; */
+}
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.bg-dark {
+  background-color: var(--dark);
+}
+.bg-light {
+  background-color: var(--light);
+}
+.color-dark {
+  color: var(--dark);
+}
+.color-light {
+  color: var(--light);
+}
+.pd-l {
+  padding: 2.4rem;
+}
+.pd-m {
+  padding: 1.6rem;
+}
+.pd-s {
+  padding: 1.2rem;
+}
+.mg-l {
+  margin: 2.4rem;
+}
+.mg-m {
+  margin: 1.6rem;
+}
+.mg-s {
+  margin: 1.2rem;
+}
+/* some reusable styles  */
+div.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  width: 100vw;
+}
+div.wrapper header.header {
+  font-weight: bolder;
+  font-size: 4.6rem;
+  letter-spacing: 1rem;
+}
+
+div.wrapper main.main {
+  flex: 1;
+  align-self: stretch;
+}
+div.wrapper main.main aside.side {
+}
+div.wrapper main.main div.grid-wrapper {
+}
+div.wrapper footer.footer {
+}
