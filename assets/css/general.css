@@ -43,8 +43,9 @@ html {
 }
 body {
   font-size: 1.8rem;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
+/* some reusable styles  */
 .center {
   display: flex;
   align-items: center;
@@ -80,28 +81,59 @@ body {
 .mg-s {
   margin: 1.2rem;
 }
-/* some reusable styles  */
+/* start of container wrapper */
 div.wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  gap: 1rem;
   height: 100vh;
   width: 100vw;
 }
+/* ######################################### */
+/* ######################################### */
+/* start of header section */
 div.wrapper header.header {
+  align-self: stretch;
   font-weight: bolder;
   font-size: 4.6rem;
-  letter-spacing: 1rem;
+  letter-spacing: 1.4rem;
 }
-
+header.header h1.h1 {
+  white-space: nowrap;
+}
+/* ######################################### */
+/* ######################################### */
+/* start of main section */
 div.wrapper main.main {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   flex: 1;
   align-self: stretch;
 }
+div.wrapper main.main > * {
+  border-radius: 2rem;
+}
+/* start of aside.side inside main section */
 div.wrapper main.main aside.side {
+  flex: 1 0 20rem; /*flex item width will be >=20rem*/
+  align-self: stretch;
 }
+/* start of div.grid-wrapper inside main section */
 div.wrapper main.main div.grid-wrapper {
+  align-self: stretch;
+  flex: 1 0 71.2rem; /*flex item will be >=71.2rem*/
 }
+main.main div.grid-wrapper div.board {
+  flex: 0 0 64rem;
+  height: 64rem;
+  border: 1px solid gray;
+  box-sizing: unset;
+}
+/* ######################################### */
+/* ######################################### */
+/* start of footer section */
 div.wrapper footer.footer {
 }
