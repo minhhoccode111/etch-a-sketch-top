@@ -9,20 +9,128 @@
     <script src="./assets/js/app.js" defer></script>
   </head>
   <body class="gradient-background">
-    <div id="wrapper" class="wrapper pd-l">
+    <div id="wrapper" class="wrapper">
       <header id="header" class="header center">
         <h1 class="h1">ETCH A SKETCH</h1>
       </header>
 
-      <main id="main" class="main pd-s mg-m">
-        <aside id="side" class="side bg-dark pd-s mg-m">
-          <div id="control" class="control"></div>
-        </aside>
-        <div id="grid-wrapper" class="grid-wrapper center bg-dark pd-s mg-m">
-          <div id="board" class="board bg-light mg-m"></div>
+      <main id="main" class="main mg-s">
+        <div id="control" class="control bg-dark mg-s">
+          <div id="ctrl-setup" class="ctrl-setup">
+            <label for="color-pen " class="start">
+              <input
+                type="color"
+                id="color-pen"
+                name="color"
+                placeholder="Your pen's color"
+                class="color-pen"
+              />
+              <span>Pen's color</span>
+            </label>
+            <!-- choose pen's color -->
+            <label for="color-bg" class="start">
+              <input
+                type="color"
+                id="color-bg"
+                name="color"
+                placeholder="Your background's color"
+                value="#ffffff"
+                class="color-bg"
+              />
+              <span>BG's color</span>
+            </label>
+            <!-- choose background color -->
+            <label for="myRange" class="start">
+              <input
+                type="range"
+                min="1"
+                max="64"
+                value="24"
+                class="grid-range"
+                name="myRange"
+                id="myRange"
+                title="Your grid size"
+              />
+              <span id="show-grid-size" class="show-grid-size">64x64</span>
+            </label>
+
+            <button
+              type="button"
+              title="Toggle grid border"
+              id="btn-toggle-border"
+              class="start btn btn-toggle-border"
+            >
+              Grid border
+            </button>
+          </div>
+          <div id="ctrl-simple" class="ctrl-simple">
+            <button
+              type="button"
+              title="Eraser"
+              id="btn-eraser"
+              class="start btn btn-eraser"
+            >
+              Eraser
+            </button>
+            <button
+              type="button"
+              title="Rainbow"
+              id="btn-rainbow"
+              class="start btn btn-rainbow"
+            >
+              Rainbow
+            </button>
+            <button
+              type="button"
+              title="Grabber"
+              id="btn-grab"
+              class="start btn btn-grab"
+            >
+              Grabber
+            </button>
+          </div>
+          <!-- simple buttons feature -->
+          <div id="ctrl-advance" class="ctrl-advance">
+            <!-- <button
+              type="button"
+              title="Eraser"
+              id="btn-eraser"
+              class="start btn btn-eraser"
+            >
+              Eraser
+            </button> -->
+            <button
+              type="button"
+              title="Fill"
+              id="btn-fill"
+              class="start btn btn-fill"
+            >
+              Fill
+            </button>
+            <button
+              type="button"
+              title="Shading"
+              id="btn-shading"
+              class="start btn btn-shading"
+            >
+              Shading
+            </button>
+            <button
+              type="button"
+              title="Lighten"
+              id="btn-lighten"
+              class="start btn btn-lighten"
+            >
+              Lighten
+            </button>
+          </div>
+          <!-- advanced buttons feature -->
+        </div>
+        <div id="grid-wrapper" class="grid-wrapper center bg-dark">
+          <div id="board" class="board bg-light mg-s"></div>
         </div>
       </main>
-      <footer id="footer" class="footer">
+      <footer id="footer" class="footer mg-m">
         <a href="https://github.com/minhhoccode111">My GitHub link</a>
       </footer>
     </div>
