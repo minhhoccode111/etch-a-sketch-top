@@ -56,10 +56,10 @@ body {
   align-items: center;
   justify-content: flex-start;
 }
-.btn-toggle {
+.btn-toggle,
+.btn-toggle-border/*this class use to add to grid layout button but specify with others buttons*/ {
   color: var(--dark);
-  background-color: var(--light);
-  /* border: 1px solid #000; */
+  background-color: var(--light) !important;
   /* this class use to add toggle a button and change its style */
 }
 .border-toggle-ctn {
@@ -155,7 +155,8 @@ main.main div.control > * {
   align-items: center;
   gap: 0.4rem;
 }
-div.control button.btn {
+div.control button.btn,
+div.control button.btn-grid {
   background-color: var(--dark);
   border: 1px solid var(--light);
   border-radius: 0.4rem;
@@ -163,6 +164,20 @@ div.control button.btn {
   cursor: pointer;
 }
 main.main div.control div.ctrl-setup {
+}
+/*specific style for input type color*/
+div.ctrl-setup input[type="color"] {
+  height: 2.4rem;
+  width: 2.4rem;
+  border: none;
+  background-color: transparent;
+}
+div.ctrl-setup input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+div.ctrl-setup input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 20rem;
 }
 /* specific style for input range slide */
 div.ctrl-setup label[for="myRange"] {
@@ -179,7 +194,7 @@ label[for="myRange"] input.grid-range {
 label[for="myRange"] span.show-grid-size {
   position: absolute;
   right: 0;
-  top: -1.6rem;
+  top: -1.1rem;
   font-size: 1.2rem;
 }
 /* specific style for input range slide */
@@ -198,6 +213,13 @@ main.main div.grid-wrapper div.board {
   height: 64rem;
   border: 1px solid gray;
   box-sizing: unset;
+  display: grid;
+  /* grid-template-columns: repeat(64, 1fr);
+  grid-template-rows: repeat(64, 1fr) !important; */
+}
+#board div {
+  background-color: #555;
+  border: 1px solid var(--light);
 }
 
 /* ######################################### */
@@ -208,8 +230,7 @@ div.wrapper footer.footer {
   right: 0;
   top: 4rem;
   z-index: 100;
-  color: rgb(88, 243, 184);
 }
 div.wrapper footer.footer a {
-  color: rgb(90, 245, 185);
+  color: rgb(8, 99, 38);
 }

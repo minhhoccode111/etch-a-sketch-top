@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Etch A Sketch</title>
     <link rel="stylesheet" href="./assets/css/general.css" />
@@ -21,8 +21,9 @@
               <input
                 type="color"
                 id="color-pen"
-                name="color"
+                name="color-pen"
                 placeholder="Your pen's color"
+                value="#000000"
                 class="color-pen"
               />
               <span>Pen's color</span>
@@ -32,7 +33,7 @@
               <input
                 type="color"
                 id="color-bg"
-                name="color"
+                name="color-bg"
                 placeholder="Your background's color"
                 value="#ffffff"
                 class="color-bg"
@@ -51,14 +52,16 @@
                 id="myRange"
                 title="Your grid size"
               />
-              <span id="show-grid-size" class="show-grid-size">64x64</span>
+              <span id="show-grid-size" class="show-grid-size"
+                >Grid Size: 24x24</span
+              >
             </label>
 
             <button
               type="button"
               title="Toggle grid border"
               id="btn-toggle-border"
-              class="start btn btn-toggle-border"
+              class="start btn-grid"
             >
               Grid border
             </button>
@@ -127,11 +130,16 @@
           <!-- advanced buttons feature -->
         </div>
         <div id="grid-wrapper" class="grid-wrapper center bg-dark">
-          <div id="board" class="board bg-light mg-s"></div>
+          <div id="board" class="board mg-s"></div>
         </div>
       </main>
       <footer id="footer" class="footer mg-m">
-        <a href="https://github.com/minhhoccode111">My GitHub link</a>
+        <a
+          href="https://github.com/minhhoccode111"
+          target="_blank"
+          rel="noopener noreferrer"
+          >My GitHub link</a
+        >
       </footer>
     </div>
   </body>
