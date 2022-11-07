@@ -1,5 +1,9 @@
 console.log("Hello, World!");
 // interactive UI with JS
+// ******** INITIALIZE VARIABLES **************
+const board = document.querySelector("#board");
+const items = board.children;
+console.log(typeof items, items);
 //1. toggle buttons (not contain toggle-grid-btn)
 const toggleBtn = document.querySelectorAll(".btn");
 const removeToggle = () => {
@@ -20,19 +24,32 @@ toggleBtn.forEach((btn) => {
   });
 });
 //1.2 toggle grid layout buttons specific to other buttons
-const gridBorder = document.querySelector("#btn-toggle-border");
-gridBorder.addEventListener("click", () => {
-  gridBorder.classList.toggle("btn-toggle-border");
+//1.2.1 toggle grid layout to items of #board
+const togGridLayoutItems = () => {
+  for (let i = 0; i < items.length; i++) {
+    if (items[i].nodeName.toLowerCase() == "div") {
+      items[i].classList.toggle("border-tog-items");
+    }
+  }
+};
+// togGridLayoutItems();
+
+//1.2.2 toggle grid layout button
+const gridBorderBtn = document.querySelector("#btn-toggle-border");
+gridBorderBtn.addEventListener("click", () => {
+  gridBorderBtn.classList.toggle("btn-toggle-border"); //this toggle class to button
+  board.classList.toggle("border-tog-ctn"); //this toggle class to show border to #board
+  if (board.classList.contains("border-tog-ctn")) {
+    togGridLayoutItems();
+  }
 });
 //2. change span of grid size when input is changed
-const board = document.querySelector("#board");
 const createItemsGrid = (num) => {
   if (num == 0) {
     return;
   } else {
     const div = document.createElement("div");
     board.append(div);
-
     return createItemsGrid(num - 1);
   }
 }; //this function take a number of grid items then create and append to the parent element #board
@@ -48,12 +65,9 @@ const sliderInput = () => {
   const output = document.querySelector(".show-grid-size");
   const slider = document.querySelector(".grid-range");
   output.innerHTML = `Grid Size: ${slider.value}x${slider.value}`;
-  console.log(slider.value);
-  deleteItemsGrid();
-  createItemsGrid(slider.value ** 2);
+  createItemsGrid(slider.value ** 2); //use **2 instead of slider.value *slider.value
   setGridTemplate(slider.value);
   slider.oninput = function () {
-    console.log(this.value);
     deleteItemsGrid();
     createItemsGrid(this.value ** 2);
     setGridTemplate(this.value);
