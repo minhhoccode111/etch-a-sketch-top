@@ -56,23 +56,16 @@ body {
   align-items: center;
   justify-content: flex-start;
 }
-.border {
-  border: 1px solid gray;
-} /*add this class to #board to easier to work with*/
 .btn-toggle,
-.btn-toggle-border/*this class use to add to grid layout button but specify with others buttons*/ {
+.btn-toggle-reset/*this class use to add to grid layout button but specify with others buttons*/ {
   color: var(--dark);
   background-color: var(--light) !important;
   /* this class use to add toggle a button and change its style */
 }
-.border-tog-ctn {
-  border: none; /*reset border*/
-  border-bottom: 1px solid rgb(155, 29, 29);
-  border-right: 1px solid rgb(131, 24, 24);
-} /*toggle 2 selector at the same time to show border correctly*/
-.border-tog-items {
-  border-top: 1px solid rgb(95, 14, 14) !important;
-  border-left: 1px solid rgb(100, 20, 20) !important;
+.items {
+  -webkit-user-select: none;
+  user-select: none;
+  /* to not be selected by user */
 }
 .bg-dark {
   background-color: var(--dark);
@@ -146,20 +139,20 @@ div.wrapper main.main div.control {
   display: grid;
   grid-template-columns: repeat(3, auto);
   justify-content: center;
-  align-items: center;
-  gap: 1rem;
+  align-items: stretch;
+  gap: 0.4rem;
   align-self: stretch;
   flex: 0 0 14rem;
 }
 main.main div.control > * {
   display: grid;
-  grid-template-rows: repeat(4, auto);
-  justify-content: start;
+  grid-template-rows: repeat(3, auto);
+  justify-content: center;
   align-items: center;
   gap: 0.4rem;
 }
 div.control button.btn,
-div.control button.btn-grid {
+div.control button.btn-reset {
   background-color: var(--dark);
   border: 1px solid var(--light);
   border-radius: 0.4rem;
@@ -167,6 +160,7 @@ div.control button.btn-grid {
   cursor: pointer;
 }
 main.main div.control div.ctrl-setup {
+  align-self: stretch;
 }
 /*specific style for input type color*/
 div.ctrl-setup input[type="color"] {
@@ -216,14 +210,9 @@ main.main div.grid-wrapper div.board {
   height: 64rem;
   box-sizing: unset;
   display: grid;
-  /* grid-template-columns: repeat(64, 1fr);
-  grid-template-rows: repeat(64, 1fr) !important; */
+  border: 1px solid gray;
+  /* gap: 0.5px; */
 }
-#board div {
-  background-color: #555;
-  /* border: 1px solid var(--light); */
-}
-
 /* ######################################### */
 /* ######################################### */
 /* start of footer section */
