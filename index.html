@@ -25,6 +25,7 @@
                 placeholder="Your pen's color"
                 value="#000000"
                 class="color-pen"
+                onchange="changeColorPen(this.value)"
               />
               <span>Pen's color</span>
             </label>
@@ -37,13 +38,14 @@
                 placeholder="Your background's color"
                 value="#ffffff"
                 class="color-bg"
+                onchange="colorBgOnchange(this.value)"
               />
               <span>BG's color</span>
             </label>
             <!-- choose background color -->
             <label for="myRange" class="start">
               <input
-                type="range"
+                type="text"
                 min="1"
                 max="96"
                 value="24"
@@ -63,7 +65,7 @@
               id="btn-reset"
               class="start btn-reset"
             >
-              Reset
+              Clear
             </button>
           </div>
           <div id="ctrl-simple" class="ctrl-simple">

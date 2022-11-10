@@ -2,11 +2,21 @@ console.log("Hello, World!");
 // ******** INITIALIZE VARIABLES **************
 let color = "transparent";
 let colorPen = "black";
-let colorBg = "";
+let colorBg = "white";
 let draw = true;
 
 const board = document.querySelector("#board");
-
+function changeColorPen(value) {
+  colorPen = value;
+}
+function colorBgOnchange(value) {
+  colorBg = value;
+  colorBgSet(colorBg);
+}
+function colorBgSet(value) {
+  board.style.backgroundColor = value;
+}
+colorBgSet(colorBg);
 //1. change span of grid size when input is changed
 function createItemsGrid(num) {
   for (let i = 0; i < num ** 2; i++) {
@@ -14,14 +24,20 @@ function createItemsGrid(num) {
     div.classList.add("items");
     div.setAttribute("draggable", "false"); //can't be grabbed
     div.style.backgroundColor = color;
+    const resetBtn = document.querySelector("#btn-reset");
+    resetBtn.addEventListener("click", () => {
+      div.style.backgroundColor = color;
+      console.log("aa");
+    });
     div.addEventListener("mouseover", () => {
       if (draw) {
         div.style.backgroundColor = colorPen;
       } else {
       }
     });
-    board.style.cssText = `grid-template-columns: repeat(${num},1fr);grid-template-rows: repeat(${num},1fr)`;
+    board.style.cssText = `grid-template-columns: repeat(${num},1fr);grid-template-rows: repeat(${num},1fr);background-color=${colorBg}`;
     board.insertAdjacentElement("beforeend", div);
+    colorBgSet(colorBg);
   }
 } //this function take a number of grid items then create and append to the parent element #board
 function deleteItemsGrid() {
@@ -33,16 +49,28 @@ function sliderInput() {
   const output = document.querySelector(".show-grid-size");
   const slider = document.querySelector(".grid-range");
   output.innerHTML = `Grid Size: ${slider.value}x${slider.value}`;
+  colorBgSet(colorBg);
+
   createItemsGrid(slider.value); //use **2 || slider.value*slider.value
-  // setGridTemplate(slider.value);
-  slider.oninput = function () {
-    deleteItemsGrid();
-    createItemsGrid(this.value);
-    //these function create #board 's items
-    output.innerHTML = `Grid Size: ${this.value}x${this.value}`;
+  slider.onchange = function () {
+    if (this.value >= 1 && this.value <= 96) {
+      colorBgSet(colorBg);
+
+      deleteItemsGrid();
+      createItemsGrid(this.value);
+      //these function create #board 's items
+      output.innerHTML = `Grid Size: ${this.value}x${this.value}`;
+    } else {
+      alert("Enter NUMBER between 1 and 96 !");
+    }
   }; //small span to show grid size
 }
 sliderInput();
+
+//#########################################################################
+//#########################################################################
+//#########################################################################
+//#########################################################################
 
 //2. toggle buttons (not contain toggle-grid-btn)
 const toggleBtn = document.querySelectorAll(".btn");
@@ -65,15 +93,6 @@ toggleBtn.forEach((btn) => {
 });
 //2.2 toggle grid layout buttons specific to other buttons
 //2.2.1 toggle reset button
-const resetBtn = document.querySelector("#btn-reset");
-resetBtn.addEventListener("mouseenter", () => {
-  resetBtn.classList.toggle("btn-toggle");
-});
-resetBtn.addEventListener("mouseleave", () => {
-  resetBtn.classList.toggle("btn-toggle");
-});
-resetBtn.addEventListener("click", () => {
-  sliderInput();
-});
+
 //################################################################
 // features functions
