@@ -1,6 +1,6 @@
 console.log("Hello, World!");
 // ******** INITIALIZE VARIABLES **************
-let color = "transparent";
+let notColored = "transparent"; //default or eraser
 let colorBox = "";
 let colorPen = "black";
 let colorBg = "white";
@@ -39,12 +39,33 @@ function colorBgSet(value) {
 // some buttons eventListeners
 function whatMode() {
   eraserBtn.addEventListener("click", () => {
-    if (isDrawing == true && isEraserOn == false) {
-      isDrawing = false;
+    if (isEraserOn == false) {
+      //when this button is off and we click it we turn it on and turn all off
       isEraserOn = true;
-    } else if (isDrawing == false && isEraserOn == true) {
+      isDrawing = false;
+      isRainbowOn = false;
+      isGrabOn = false;
+    } else if (isEraserOn == true) {
+      //when this button is already on and we click it, we turn it off and turn back the normal drawing feature
       isDrawing = true;
       isEraserOn = false;
+      isRainbowOn = false;
+      isGrabOn = false;
+    }
+  });
+  rainbowBtn.addEventListener("click", () => {
+    if (isRainbowOn == false) {
+      //when this button is off and we click it we turn it on and turn all off
+      isRainbowOn = true;
+      isEraserOn = false;
+      isDrawing = false;
+      isGrabOn = false;
+    } else if (isRainbowOn == true) {
+      //when this button is already on and we click it, we turn it off and turn back the normal drawing feature
+      isDrawing = true;
+      isEraserOn = false;
+      isRainbowOn = false;
+      isGrabOn = false;
     }
   });
   if (isDrawing == true) {
@@ -61,6 +82,13 @@ function whatMode() {
     body.addEventListener("mouseup", () => {
       draw = false;
     });
+  } else if (isRainbowOn == true) {
+    body.addEventListener("mousedown", () => {
+      draw = true;
+    });
+    body.addEventListener("mouseup", () => {
+      draw = false;
+    });
   }
 }
 whatMode();
@@ -70,9 +98,9 @@ function createItemsGrid(num) {
     const div = document.createElement("div");
     div.classList.add("items"); //can't be selected
     div.setAttribute("draggable", "false"); //can't be grabbed
-    div.style.backgroundColor = color; //transparent color
+    div.style.backgroundColor = notColored; //transparent notColored
     resetBtn.addEventListener("click", () => {
-      div.style.backgroundColor = color;
+      div.style.backgroundColor = notColored;
     });
     div.addEventListener("mouseover", colorDiv);
     board.style.cssText = `grid-template-columns: repeat(${num},1fr);grid-template-rows: repeat(${num},1fr);background-color=${colorBg}`;
@@ -91,13 +119,20 @@ function colorDiv() {
   } else if (isEraserOn == true) {
     if (draw) {
       mode.textContent = "Status: doing eraser";
-      this.style.backgroundColor = "transparent";
+      this.style.backgroundColor = notColored;
     } else {
       mode.textContent = "Status: not doing eraser";
     }
+  } else if (isRainbowOn == true) {
+    if (draw) {
+      mode.textContent = "Status: doing rainbow";
+      this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+    } else {
+      mode.textContent = "Status: not doing rainbow";
+    }
   }
 }
-createItemsGrid(96); //FIXME:remember to change back to default value(24)
+createItemsGrid(40); //FIXME:remember to change back to default value(24)
 function deleteItemsGrid() {
   while (board.firstChild) {
     board.removeChild(board.firstChild);
