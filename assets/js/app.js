@@ -3,9 +3,11 @@ console.log("Hello, World!");
 let color = "transparent";
 let colorPen = "black";
 let colorBg = "white";
-let draw = true;
+let draw = false;
 
 const board = document.querySelector("#board");
+const mode = document.querySelector(".mode");
+const body = document.querySelector("body");
 function changeColorPen(value) {
   colorPen = value;
 }
@@ -16,6 +18,17 @@ function colorBgOnchange(value) {
 function colorBgSet(value) {
   board.style.backgroundColor = value;
 }
+function drawOrNot() {
+  body.addEventListener("mousedown", () => {
+    draw = !draw;
+    mode.textContent = "Mode: coloring";
+  });
+  body.addEventListener("mouseup", () => {
+    draw = false;
+    mode.textContent = "Mode: Not coloring";
+  });
+}
+drawOrNot();
 //1. change span of grid size when input is changed
 function createItemsGrid(num) {
   for (let i = 0; i < num ** 2; i++) {
@@ -31,7 +44,6 @@ function createItemsGrid(num) {
     div.addEventListener("mouseover", () => {
       if (draw) {
         div.style.backgroundColor = colorPen;
-      } else {
       }
     });
     board.style.cssText = `grid-template-columns: repeat(${num},1fr);grid-template-rows: repeat(${num},1fr);background-color=${colorBg}`;
@@ -39,6 +51,7 @@ function createItemsGrid(num) {
     colorBgSet(colorBg);
   }
 } //this function take a number of grid items then create and append to the parent element #board
+createItemsGrid(24);
 function deleteItemsGrid() {
   while (board.firstChild) {
     board.removeChild(board.firstChild);
@@ -49,11 +62,9 @@ function sliderInput() {
   const slider = document.querySelector(".grid-range");
   output.innerHTML = `Grid Size: ${slider.value}x${slider.value}`;
   // colorBgSet(colorBg);
-  createItemsGrid(slider.value); //use **2 || slider.value*slider.value
   slider.onchange = function () {
     if (this.value >= 1 && this.value <= 96) {
       colorBgSet(colorBg);
-
       deleteItemsGrid();
       createItemsGrid(this.value);
       //these function create #board 's items
@@ -69,7 +80,6 @@ sliderInput();
 //#########################################################################
 //#########################################################################
 //#########################################################################
-
 //2. toggle buttons (not contain toggle-grid-btn)
 const toggleBtn = document.querySelectorAll(".btn");
 function removeToggle() {

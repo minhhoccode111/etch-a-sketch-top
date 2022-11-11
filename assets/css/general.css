@@ -64,8 +64,8 @@ body {
   /* this class use to add toggle a button and change its style */
 }
 .items {
-  -webkit-user-select: none;
-  user-select: none;
+  -webkit-user-select: none !important;
+  user-select: none !important;
   /* to not be selected by user */
 }
 .bg-dark {
