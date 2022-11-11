@@ -16,7 +16,6 @@ function colorBgOnchange(value) {
 function colorBgSet(value) {
   board.style.backgroundColor = value;
 }
-colorBgSet(colorBg);
 //1. change span of grid size when input is changed
 function createItemsGrid(num) {
   for (let i = 0; i < num ** 2; i++) {
@@ -49,8 +48,7 @@ function sliderInput() {
   const output = document.querySelector(".show-grid-size");
   const slider = document.querySelector(".grid-range");
   output.innerHTML = `Grid Size: ${slider.value}x${slider.value}`;
-  colorBgSet(colorBg);
-
+  // colorBgSet(colorBg);
   createItemsGrid(slider.value); //use **2 || slider.value*slider.value
   slider.onchange = function () {
     if (this.value >= 1 && this.value <= 96) {
@@ -61,7 +59,7 @@ function sliderInput() {
       //these function create #board 's items
       output.innerHTML = `Grid Size: ${this.value}x${this.value}`;
     } else {
-      alert("Enter NUMBER between 1 and 96 !");
+      alert("Enter a NUMBER between 1 and 96 right now!");
     }
   }; //small span to show grid size
 }
