@@ -5,13 +5,12 @@ let colorBox = "";
 let colorPen = "black";
 let colorBg = "white";
 let isDrawing = true;
-let draw = false;
 let isEraserOn = false;
-let eraser = false;
 let isRainbowOn = false;
-let rainbow = false;
 let isGrabOn = false;
-let grab = false;
+// isDoingSomething to set mode we re using
+let draw = false;
+// draw is to consider whether we re mousedown (to draw) or not
 
 const board = document.querySelector("#board");
 const resetBtn = document.querySelector("#btn-reset");
@@ -40,7 +39,7 @@ function colorBgSet(value) {
 // some buttons eventListeners
 function whatMode() {
   eraserBtn.addEventListener("click", () => {
-    if (isDrawing && isEraserOn == false) {
+    if (isDrawing == true && isEraserOn == false) {
       isDrawing = false;
       isEraserOn = true;
     } else if (isDrawing == false && isEraserOn == true) {
@@ -48,23 +47,19 @@ function whatMode() {
       isEraserOn = false;
     }
   });
-  if (isDrawing) {
+  if (isDrawing == true) {
     body.addEventListener("mousedown", () => {
       draw = true;
-      mode.textContent = "Mode: coloring";
     });
     body.addEventListener("mouseup", () => {
       draw = false;
-      mode.textContent = "Mode: Not coloring";
     });
-  } else if (isEraserOn) {
+  } else if (isEraserOn == true) {
     body.addEventListener("mousedown", () => {
       draw = true;
-      mode.textContent = "Mode: do eraser-ing";
     });
     body.addEventListener("mouseup", () => {
       draw = false;
-      mode.textContent = "Mode: Not do eraser-ing";
     });
   }
 }
@@ -86,13 +81,23 @@ function createItemsGrid(num) {
   }
 } //this function take a number of grid items then create and append to the parent element #board
 function colorDiv() {
-  if (isDrawing && draw) {
-    this.style.backgroundColor = colorPen;
-  } else if (isEraserOn && draw) {
-    this.style.backgroundColor = "transparent";
+  if (isDrawing == true) {
+    if (draw) {
+      this.style.backgroundColor = colorPen;
+      mode.textContent = "Status: coloring";
+    } else {
+      mode.textContent = "Status: not coloring";
+    }
+  } else if (isEraserOn == true) {
+    if (draw) {
+      mode.textContent = "Status: doing eraser";
+      this.style.backgroundColor = "transparent";
+    } else {
+      mode.textContent = "Status: not doing eraser";
+    }
   }
 }
-createItemsGrid(24);
+createItemsGrid(96); //FIXME:remember to change back to default value(24)
 function deleteItemsGrid() {
   while (board.firstChild) {
     board.removeChild(board.firstChild);
