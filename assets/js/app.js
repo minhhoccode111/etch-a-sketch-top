@@ -40,14 +40,14 @@ function colorBgSet(value) {
 function whatMode() {
   eraserBtn.addEventListener("click", () => {
     if (isEraserOn == false) {
-      //when this button is off and we click it we turn it on and turn all off
       isEraserOn = true;
+      //when this button is off and we click it we turn it on and turn all off
       isDrawing = false;
       isRainbowOn = false;
       isGrabOn = false;
     } else if (isEraserOn == true) {
-      //when this button is already on and we click it, we turn it off and turn back the normal drawing feature
       isDrawing = true;
+      //when this button is already on and we click it, we turn it off and turn back the normal drawing feature
       isEraserOn = false;
       isRainbowOn = false;
       isGrabOn = false;
@@ -55,14 +55,14 @@ function whatMode() {
   });
   rainbowBtn.addEventListener("click", () => {
     if (isRainbowOn == false) {
-      //when this button is off and we click it we turn it on and turn all off
       isRainbowOn = true;
+      //when this button is off and we click it we turn it on and turn all off
       isEraserOn = false;
       isDrawing = false;
       isGrabOn = false;
     } else if (isRainbowOn == true) {
-      //when this button is already on and we click it, we turn it off and turn back the normal drawing feature
       isDrawing = true;
+      //when this button is already on and we click it, we turn it off and turn back the normal drawing feature
       isEraserOn = false;
       isRainbowOn = false;
       isGrabOn = false;
@@ -103,6 +103,7 @@ function createItemsGrid(num) {
       div.style.backgroundColor = notColored;
     });
     div.addEventListener("mouseover", colorDiv);
+    // div.addEventListener("click", colorDiv);
     board.style.cssText = `grid-template-columns: repeat(${num},1fr);grid-template-rows: repeat(${num},1fr);background-color=${colorBg}`;
     board.insertAdjacentElement("beforeend", div);
     colorBgSet(colorBg);
@@ -114,21 +115,21 @@ function colorDiv() {
       this.style.backgroundColor = colorPen;
       mode.textContent = "Status: coloring";
     } else {
-      mode.textContent = "Status: not coloring";
+      mode.textContent = "Status: Mousedown to color";
     }
   } else if (isEraserOn == true) {
     if (draw) {
       mode.textContent = "Status: doing eraser";
       this.style.backgroundColor = notColored;
     } else {
-      mode.textContent = "Status: not doing eraser";
+      mode.textContent = "Status: Mousedown to eraser";
     }
   } else if (isRainbowOn == true) {
     if (draw) {
       mode.textContent = "Status: doing rainbow";
       this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
     } else {
-      mode.textContent = "Status: not doing rainbow";
+      mode.textContent = "Status: Mousedown to draw rainbow";
     }
   }
 }

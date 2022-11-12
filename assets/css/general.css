@@ -68,6 +68,16 @@ body {
   user-select: none !important;
   /* to not be selected by user */
 }
+.tooltip {
+  font-size: 1.2rem;
+  position: absolute;
+  color: rgb(255, 255, 255);
+  z-index: 100;
+  top: 19%;
+  right: 22%;
+  -webkit-user-select: none !important;
+  user-select: none !important;
+}
 .bg-dark {
   background-color: var(--dark);
 }
