@@ -56,6 +56,14 @@ body {
   align-items: center;
   justify-content: flex-start;
 }
+.border-tl {
+  border-top: 1px solid rgba(0, 0, 0, 0.5);
+  border-left: 1px solid rgba(0, 0, 0, 0.5);
+}
+.border-rb {
+  border-right: 2px solid rgba(0, 0, 0, 0.5) !important;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.5) !important;
+}
 .btn-toggle,
 .btn:hover,
 .btn-reset:hover,
@@ -243,9 +251,7 @@ main.main div.grid-wrapper div.board {
   height: 64rem;
   box-sizing: unset;
   display: grid;
-  border: 1px solid gray;
-  /* background-color: #fff; */
-  /* gap: 0.5px; */
+  /* border: 1px solid gray; */
 }
 /* ######################################### */
 /* ######################################### */

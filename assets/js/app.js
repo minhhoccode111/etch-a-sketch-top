@@ -8,6 +8,7 @@ let isDrawing = true;
 let isEraserOn = false;
 let isRainbowOn = false;
 let isGrabOn = false;
+let isBordered = false;
 // isDoingSomething to set mode we re using
 let draw = false;
 // draw is to consider whether we re mousedown (to draw) or not
@@ -17,6 +18,7 @@ const resetBtn = document.querySelector("#btn-reset");
 const eraserBtn = document.querySelector("#btn-eraser");
 const rainbowBtn = document.querySelector("#btn-rainbow");
 const grabBtn = document.querySelector("#btn-grab");
+const borderBtn = document.querySelector(".btn-border");
 let divs = board.querySelectorAll("div");
 const mode = document.querySelector(".mode");
 const body = document.querySelector("body");
@@ -36,7 +38,6 @@ function colorBgSet(value) {
 //################################################################
 // some buttons eventListeners
 
-// some buttons eventListeners
 function whatMode() {
   eraserBtn.addEventListener("click", () => {
     if (isEraserOn == false) {
@@ -92,6 +93,7 @@ function whatMode() {
   }
 }
 whatMode();
+// some buttons eventListeners
 //1. change span of grid size when input is changed
 function createItemsGrid(num) {
   for (let i = 0; i < num ** 2; i++) {
@@ -101,6 +103,17 @@ function createItemsGrid(num) {
     div.style.backgroundColor = notColored; //transparent notColored
     resetBtn.addEventListener("click", () => {
       div.style.backgroundColor = notColored;
+    });
+    borderBtn.addEventListener("click", () => {
+      if (isBordered == false) {
+        isBordered = true;
+        div.classList.toggle("border-tl");
+        board.classList.toggle("border-rb");
+      } else if (isBordered == true) {
+        isBordered = false;
+        div.classList.toggle("border-tl");
+        board.classList.toggle("border-rb");
+      }
     });
     div.addEventListener("mouseover", colorDiv);
     // div.addEventListener("click", colorDiv);
@@ -133,7 +146,7 @@ function colorDiv() {
     }
   }
 }
-createItemsGrid(40); //FIXME:remember to change back to default value(24)
+createItemsGrid(52); //FIXME:remember to change back to default value(24)
 function deleteItemsGrid() {
   while (board.firstChild) {
     board.removeChild(board.firstChild);
@@ -183,7 +196,6 @@ toggleBtn.forEach((btn) => {
   });
 });
 //specific border button
-const borderBtn = document.querySelector(".btn-border");
 borderBtn.addEventListener("click", () => {
   borderBtn.classList.toggle("btn-toggle");
 });
