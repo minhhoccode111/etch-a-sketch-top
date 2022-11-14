@@ -13,7 +13,7 @@
       <header id="header" class="header center">
         <h1 class="h1">ETCH A SKETCH</h1>
       </header>
-      <p class="tooltip">Grab and fill features are under maintenance!!!</p>
+      <p class="tooltip">Under maintenance!!!</p>
       <main id="main" class="main mg-s">
         <div id="control" class="control bg-dark mg-s">
           <div id="ctrl-setup" class="ctrl-setup">
@@ -40,7 +40,7 @@
                 class="color-bg"
                 onchange="colorBgOnchange(this.value)"
               />
-              <span>BG's color</span>
+              <span>Background's color</span>
             </label>
             <!-- choose background color -->
             <label for="myRange" class="start">
@@ -61,11 +61,19 @@
 
             <button
               type="button"
-              title="Toggle grid border"
+              title="Clear"
               id="btn-reset"
               class="start btn-reset"
             >
               Clear
+            </button>
+            <button
+              type="button"
+              title="Toggle grid border"
+              id="btn-border"
+              class="start btn-border btn-border"
+            >
+              Border
             </button>
           </div>
           <div id="ctrl-simple" class="ctrl-simple">

@@ -182,3 +182,8 @@ toggleBtn.forEach((btn) => {
     }
   });
 });
+//specific border button
+const borderBtn = document.querySelector(".btn-border");
+borderBtn.addEventListener("click", () => {
+  borderBtn.classList.toggle("btn-toggle");
+});
