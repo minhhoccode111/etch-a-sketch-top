@@ -1,7 +1,6 @@
 console.log("Hello, World!");
 // ******** INITIALIZE VARIABLES **************
 let notColored = "transparent"; //default or eraser
-let colorBox = "";
 let colorPen = "black";
 let colorBg = "white";
 let isDrawing = true;
@@ -19,7 +18,6 @@ const eraserBtn = document.querySelector("#btn-eraser");
 const rainbowBtn = document.querySelector("#btn-rainbow");
 const grabBtn = document.querySelector("#btn-grab");
 const borderBtn = document.querySelector(".btn-border");
-let divs = board.querySelectorAll("div");
 const mode = document.querySelector(".mode");
 const body = document.querySelector("body");
 
@@ -140,7 +138,11 @@ function colorDiv() {
   } else if (isRainbowOn == true) {
     if (draw) {
       mode.textContent = "Status: doing rainbow";
-      this.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+      this.style.backgroundColor = `rgb(${Math.floor(
+        Math.random() * 256
+      )}, ${Math.floor(Math.random() * 256)},${Math.floor(
+        Math.random() * 256
+      )})`;
     } else {
       mode.textContent = "Status: Mousedown to draw rainbow";
     }
