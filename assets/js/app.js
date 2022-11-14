@@ -20,6 +20,13 @@ const grabBtn = document.querySelector("#btn-grab");
 const borderBtn = document.querySelector(".btn-border");
 const mode = document.querySelector(".mode");
 const body = document.querySelector("body");
+const penColorPicker = document.querySelector("#color-pen");
+const bgColorPicker = document.querySelector("#color-bg");
+const sizeInput = document.querySelector("#myRange");
+
+penColorPicker.oninput = (e) => changeColorPen(e.target.value);
+bgColorPicker.oninput = (e) => colorBgOnchange(e.target.value);
+sizeInput.onchange = (e) => createItemsGrid(e.target.value);
 
 // 3 functions to set colors onchange
 function changeColorPen(value) {
@@ -150,9 +157,7 @@ function colorDiv() {
 }
 createItemsGrid(52); //FIXME:remember to change back to default value(24)
 function deleteItemsGrid() {
-  while (board.firstChild) {
-    board.removeChild(board.firstChild);
-  }
+  board.innerHTML = "";
 } //this function use to delete old items before new new items pass in
 function sliderInput() {
   const output = document.querySelector(".show-grid-size");

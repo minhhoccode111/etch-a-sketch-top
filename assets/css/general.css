@@ -230,7 +230,7 @@ label[for="myRange"] input.grid-range {
 label[for="myRange"] span.show-grid-size {
   pointer-events: none;
   position: absolute;
-  right: 0;
+  right: 1.2rem;
   top: -1.1rem;
   font-size: 1.2rem;
   margin: 1rem 1rem 0 0;
