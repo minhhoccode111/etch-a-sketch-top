@@ -29,7 +29,20 @@ let isDrawing = true;
 let isEraserOn = false;
 let isRainbowOn = false;
 let isGrabOn = false;
+let isFillOn = false;
 let isBordered = false;
+let isShadingOn = false;
+let isLightenOn = false;
+
+const obj = {
+  drawing: isDrawing,
+  eraser: isEraserOn,
+  rainbow: isRainbowOn,
+  grab: isGrabOn,
+  fill: isFillOn,
+  shading: isShadingOn,
+  lighten: isLightenOn,
+};
 
 let mousedown = false;
 document.body.onmousedown = () => (mousedown = true);
@@ -46,43 +59,69 @@ const borderBtn = document.querySelector(".btn-border");
 const mode = document.querySelector(".mode");
 const grabBtn = document.querySelector("#btn-grab");
 const output = document.querySelector(".show-grid-size");
+const shadingBtn = document.querySelector("#btn-shading");
+const lightenBtn = document.querySelector("#btn-lighten");
 
 penColorPicker.oninput = (e) => setPenColor(e.target.value);
 bgColorPicker.oninput = (e) => setBgColor(e.target.value);
 sizeInput.onchange = (e) => changeGridSize(e.target.value);
-eraserBtn.onclick = () => eraserBtnClickedSetMode();
-rainbowBtn.onclick = () => rainbowBtnClickedSetMode();
-// resetBtn.onclick = () => reloadGrid();
 
-function eraserBtnClickedSetMode() {
-  if (isEraserOn == false) {
-    isEraserOn = true;
-    //when this button is off and we click it we turn it on and turn all off
-    isDrawing = false;
-    isRainbowOn = false;
-    isGrabOn = false;
-  } else if (isEraserOn == true) {
-    isDrawing = true;
-    //when this button is already on and we click it, we turn it off and turn back the normal drawing feature
-    isEraserOn = false;
-    isRainbowOn = false;
-    isGrabOn = false;
-  }
+eraserBtn.onclick = () => setMode("isEraserOn");
+rainbowBtn.onclick = () => setMode("isRainbowOn");
+shadingBtn.onclick = () => setMode("isShadingOn");
+lightenBtn.onclick = () => setMode("isLightenOn");
+
+function turnAllOff() {
+  isDrawing = false;
+  isEraserOn = false;
+  isRainbowOn = false;
+  isGrabOn = false;
+  isBordered = false;
+  isShadingOn = false;
+  isLightenOn = false;
+  isFillOn = false;
+}
+function resetMode() {
+  turnAllOff();
+  isDrawing = true;
 }
 
-function rainbowBtnClickedSetMode() {
-  if (isRainbowOn == false) {
-    isRainbowOn = true;
-    //when this button is off and we click it we turn it on and turn all off
-    isEraserOn = false;
-    isDrawing = false;
-    isGrabOn = false;
-  } else if (isRainbowOn == true) {
-    isDrawing = true;
-    //when this button is already on and we click it, we turn it off and turn back the normal drawing feature
-    isEraserOn = false;
-    isRainbowOn = false;
-    isGrabOn = false;
+function setMode(mode) {
+  switch (mode) {
+    case "isEraserOn":
+      if (isEraserOn == false) {
+        turnAllOff(); //we turn everything off
+        isEraserOn = true; //then we turn this feature on
+      } else {
+        resetMode(); // if this variable is already been true, then we do the resetMode()
+      }
+      break;
+    case "isRainbowOn":
+      if (isRainbowOn == false) {
+        turnAllOff(); //we turn everything off
+        isRainbowOn = true; //then we turn this feature on
+      } else {
+        resetMode(); // if this variable is already been true, then we do the resetMode()
+      }
+      break;
+    case "isShadingOn":
+      if (isShadingOn == false) {
+        turnAllOff(); //we turn everything off
+        isShadingOn = true; //then we turn this feature on
+      } else {
+        resetMode(); // if this variable is already been true, then we do the resetMode()
+      }
+      break;
+    case "isLightenOn":
+      if (isLightenOn == false) {
+        turnAllOff(); //we turn everything off
+        isLightenOn = true; //then we turn this feature on
+      } else {
+        resetMode(); // if this variable is already been true, then we do the resetMode()
+      }
+      break;
+    default: //
+      resetMode(); // if this variable is already been true, then we do the resetMode()
   }
 }
 
