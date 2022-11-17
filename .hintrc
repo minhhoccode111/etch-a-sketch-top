@@ -10,6 +10,7 @@
           "text-decoration-thickness"
         ]
       }
-    ]
+    ],
+    "meta-viewport": "off"
   }
 }
