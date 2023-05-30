@@ -10,3 +10,7 @@
   document.body.onmouseup = () => (mousedown = false);
   -app.js is my first try to do features of this app so the code is a little messy
   -and script.js is my second try
+
+[View all my projects Live demo links](https://minhhoccode111.github.io/allProjectssLiveDemo/)
+
+[View this project Live demo](https://minhhoccode111.github.io/etchASketchTOP/)
