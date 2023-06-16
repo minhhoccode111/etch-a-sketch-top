@@ -39,6 +39,19 @@ function Cell(isRightest, isBottomest) {
   };
 }
 
+// #################### COLOR #################### //
+const color = (() => {
+  const inputPen = document.getElementById("input__pen");
+  const inputBg = document.getElementById("input__bg");
+
+  const pen = () => inputPen.value;
+  const bg = () => inputBg.value;
+  return {
+    bg,
+    pen,
+  };
+})();
+
 // #################### BOARD #################### //
 const board = (() => {
   const grid = document.getElementById("main__grid");
@@ -63,7 +76,11 @@ const board = (() => {
     grid.style.gridTemplate = `repeat(${n},1fr)/repeat(${n},1fr)`;
 
     for (let i = 0; i < eleArr.length; i++) {
-      grid.appendChild(eleArr[i].getDiv());
+      const el = eleArr[i];
+      el.getDiv().addEventListener("mouseover", () => {
+        el.setColor(color.pen());
+      });
+      grid.appendChild(el.getDiv());
     }
   };
 
@@ -82,9 +99,6 @@ const board = (() => {
 // #################### HANDLER #################### //
 const handler = (() => {
   const size = document.getElementById("input__size");
-  const pen = document.getElementById("input__pen");
-  const bg = document.getElementById("input__bg");
-
   const border = document.getElementById("button__border");
   const ok = document.getElementById("button__size");
 
@@ -97,6 +111,7 @@ const handler = (() => {
   });
 
   window.addEventListener("DOMContentLoaded", () => {
-    board.createGrid(+size.value);
+    board.createGrid(24);
+    // board.createGrid(+size.value);
   });
 })();
