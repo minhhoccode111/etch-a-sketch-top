@@ -131,6 +131,8 @@ li {
 }
 #button__size {
   flex: 0;
+  height: 100%;
+  align-self: center;
 }
 #span__size {
 }
@@ -149,4 +151,6 @@ li {
 #main__set__grabber {
 }
 #main__set__filler {
+}
+#main__set__normal {
 }
