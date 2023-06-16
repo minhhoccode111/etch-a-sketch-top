@@ -2,153 +2,128 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge" /> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Etch A Sketch</title>
-    <link rel="stylesheet" href="./assets/css/general.css" />
-    <!-- <script src="./assets/js/app.js" defer></script> -->
-    <script src="./assets/js/script.js" defer></script>
+    <title>Etch a sketch</title>
+    <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body class="gradient-background">
-    <div id="wrapper" class="wrapper">
-      <header id="header" class="header center">
-        <h1 class="h1">ETCH A SKETCH</h1>
+  <body>
+    <div id="wrapper">
+      <header id="header">
+        <h1 id="header__title">etch a sketch</h1>
       </header>
-      <p class="tooltip">Under maintenance!!!</p>
-      <main id="main" class="main mg-s">
-        <div id="control" class="control bg-dark mg-s">
-          <div id="ctrl-setup" class="ctrl-setup">
-            <label for="color-pen " class="start">
+      <main id="main">
+        <div id="main__setting">
+          <div
+            id="main__set__pen"
+            class="left-stretch main__set__start"
+            title="Choose color for you pen!"
+          >
+            <label id="label__pen" for="input__pen ">
               <input
                 type="color"
-                id="color-pen"
-                name="color-pen"
+                id="input__pen"
+                name="input__pen"
                 placeholder="Your pen's color"
                 value="#000000"
-                class="color-pen"
+                class="input__pen"
               />
               <span>Pen's color</span>
             </label>
-            <!-- choose pen's color -->
-            <label for="color-bg" class="start">
+          </div>
+          <div
+            id="main__set__bg"
+            class="left-stretch main__set__start"
+            title="Choose color for you background!"
+          >
+            <label id="label__bg" for="input__bg">
               <input
                 type="color"
-                id="color-bg"
-                name="color-bg"
+                id="input__bg"
+                name="input__bg"
                 placeholder="Your background's color"
                 value="#ffffff"
-                class="color-bg"
+                class="input__bg"
               />
               <span>Background's color</span>
             </label>
-            <!-- choose background color -->
-            <label for="myRange" class="start">
+          </div>
+          <div
+            id="main__set__size"
+            class="left-stretch main__set__start"
+            title="Input your grid size. Between 2 and 80."
+          >
+            <label id="label__size" for="input__size">
               <input
                 type="number"
                 min="1"
-                max="96"
-                value="24"
-                class="grid-range"
-                name="myRange"
-                id="myRange"
-                title="Your grid size"
+                max="80"
+                value="10"
+                class="input__size"
+                name="input__size"
+                id="input__size"
+                placeholder="2 to 80"
               />
-              <span id="show-grid-size" class="show-grid-size"
-                >Grid Size: 24x24</span
+              <button
+                id="button__size"
+                title="Click to submit your size changes!"
               >
+                ok
+              </button>
+              <span id="span__size" class="center">Size: 20x20</span>
             </label>
-
-            <button
-              type="button"
-              title="Clear"
-              id="btn-reset"
-              class="start btn-reset"
-            >
-              Clear
-            </button>
-            <button
-              type="button"
-              title="Toggle grid border"
-              id="btn-border"
-              class="start btn-border btn-border"
-            >
-              Border
-            </button>
           </div>
-          <div id="ctrl-simple" class="ctrl-simple">
-            <button
-              type="button"
-              title="Eraser"
-              id="btn-eraser"
-              class="start btn btn-eraser"
-              value="transparent"
-            >
-              Eraser
-            </button>
-            <button
-              type="button"
-              title="Rainbow"
-              id="btn-rainbow"
-              value="rainbow"
-              class="start btn btn-rainbow"
-            >
-              Rainbow
-            </button>
-            <button
-              type="button"
-              title="Grabber"
-              id="btn-grab"
-              value="grab"
-              class="start btn btn-grab"
-            >
-              Grabber
-            </button>
+          <div id="main__set__eraser" title="Set to Eraser mode!">
+            <button id="button__eraser">eraser</button>
           </div>
-          <!-- simple buttons feature -->
-          <div id="ctrl-advance" class="ctrl-advance">
-            <button
-              type="button"
-              title="Shading"
-              id="btn-shading"
-              value="shading"
-              class="start btn btn-shading"
-            >
-              Shading
-            </button>
-            <button
-              type="button"
-              title="Lighten"
-              id="btn-lighten"
-              value="lighten"
-              class="start btn btn-lighten"
-            >
-              Lighten
-            </button>
-            <button
-              type="button"
-              title="Fill"
-              id="btn-fill"
-              value="fill"
-              class="start btn btn-fill"
-            >
-              Fill
-            </button>
+          <div id="main__set__rainbow" title="Your pen's color will be random!">
+            <button id="button__rainbow">rainbow</button>
           </div>
-          <!-- advanced buttons feature -->
+          <div
+            id="main__set__shaden"
+            title="Your pen will make the base color darker!"
+          >
+            <button id="button__shaden">shaden</button>
+          </div>
+          <div id="main__set__clear" title="Clear the board!">
+            <button id="button__clear">clear</button>
+          </div>
+          <div
+            id="main__set__lighten"
+            title="Your pen will make the base color lighter!"
+          >
+            <button id="button__lighten">lighten</button>
+          </div>
+          <div id="main__set__grabber" title="Color picker!">
+            <button id="button__grabber">grabber</button>
+          </div>
+          <div id="main__set__border" title="Toggle board's child's borders">
+            <button id="button__border">border</button>
+          </div>
+          <div
+            id="main__set__filler"
+            title="Fill pen's color to a closed area!"
+          >
+            <button id="button__filler">filler</button>
+          </div>
         </div>
-        <div id="grid-wrapper" class="grid-wrapper center bg-dark">
-          <div id="board" class="board mg-s"></div>
+        <div id="main__info">
+          <h2 id="main__info__message_0"></h2>
+          <h2 id="main__info__message_1"></h2>
         </div>
-        <h2 class="mode">Status: not coloring</h2>
+        <div id="main__grid" title="Mouse down to draw!"></div>
       </main>
-      <footer id="footer" class="footer mg-m">
-        <a
-          href="https://github.com/minhhoccode111"
-          target="_blank"
-          rel="noopener noreferrer"
-          >My GitHub link</a
-        >
+      <footer id="footer" class="center">
+        <p id="footer__message_0">
+          Made with love by
+          <a
+            href="https://github.com/minhhoccode111"
+            target="_blank"
+            id="footer__message__link"
+            >Đặng Hoàng Minh</a
+          >.
+        </p>
       </footer>
     </div>
+    <script src="./script.js" type="module" defer></script>
   </body>
 </html>

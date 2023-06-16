@@ -1,0 +1,152 @@
+:root {
+  font-size: 10px;
+}
+
+*,
+::before,
+::after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+html {
+}
+body {
+  font-size: 2rem;
+}
+button {
+  font-size: 1.6rem;
+  text-transform: uppercase;
+  padding: 0.8rem 1.6rem;
+  border-radius: 0.8rem;
+  width: 100%;
+  transition: all 0.15s;
+}
+button:hover {
+  color: white;
+  background-color: black;
+}
+input {
+  font-size: 2rem;
+}
+a {
+}
+ul,
+li {
+  list-style-type: none;
+}
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.left-stretch {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+/* #################### SKELETON #################### */
+#wrapper {
+  padding: 1rem;
+  margin: 1rem;
+}
+#header {
+  color: lightslategray;
+  background-color: lightpink;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1.2rem;
+}
+#header__title {
+  text-align: center;
+  text-transform: uppercase;
+}
+#main {
+  width: 100%;
+  max-width: 100rem;
+  margin: 7.2rem auto;
+}
+#main__setting {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: 2fr repeat(3, 1fr);
+  gap: 1rem;
+}
+#main__setting button {
+  height: 100%;
+}
+#main__info {
+}
+#main__info__message_0 {
+}
+#main__info__message_1 {
+}
+#main__grid {
+  margin: 1rem auto;
+  border: 1px solid #000;
+  height: 48rem;
+  width: 48rem;
+  display: grid;
+}
+#footer {
+  margin: 0 auto;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 0.4em;
+  color: lightslategray;
+  background-color: lightpink;
+}
+#footer__message_0 {
+}
+#footer__message__link {
+}
+
+/* #################### DETAILED #################### */
+/* ################# MAIN__SETTING__CHILD ################# */
+.main__set__start {
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+#main__set__pen {
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+#main__set__bg {
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+#main__set__size {
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
+#label__size {
+  width: 100%;
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+}
+#button__size {
+  flex: 0;
+}
+#span__size {
+}
+#main__set__eraser {
+}
+#main__set__clear {
+}
+#main__set__border {
+}
+#main__set__rainbow {
+}
+#main__set__shaden {
+}
+#main__set__lighten {
+}
+#main__set__grabber {
+}
+#main__set__filler {
+}
