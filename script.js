@@ -11,7 +11,7 @@ function Cell(isRightest, isBottomest) {
   _div.style.borderStyle = "solid";
 
   if (isRightest) {
-    _div.style.borderTopWidth = "0";
+    _div.style.borderRightWidth = "0";
   }
   if (isBottomest) {
     _div.style.borderBottomWidth = "0";
@@ -27,9 +27,8 @@ function Cell(isRightest, isBottomest) {
   };
 
   const toggleBorder = () => {
-    _div.style.borderColor === "gray"
-      ? _div.style.borderColor === "transparent"
-      : _div.style.borderColor === "gray";
+    _div.style.borderColor =
+      _div.style.borderColor === "gray" ? "transparent" : "gray";
   };
 
   return {
@@ -69,17 +68,9 @@ const board = (() => {
   };
 
   const toggleBorder = () => {
-    for (const e of eleArr) {
-      e.toggleBorder();
+    for (const el of eleArr) {
+      el.toggleBorder();
     }
-    for (let i = 0; i < eleArr.length; i++) {
-      grid.appendChild(eleArr[i].getDiv());
-    }
-    // let children = grid.querySelectorAll("div");
-    // children.forEach((child) => child.toggleBorder());
-    // for (const el of eleArr) {
-    //   grid.appendChild(el.toggleBorder().getDiv());
-    // }
   };
 
   return {
