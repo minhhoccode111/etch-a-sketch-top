@@ -28,16 +28,14 @@ function Cell(isRightest, isBottomest) {
   };
 
   const random = () => {
-    const randomR0 = hex[Math.floor(Math.random() * hex.length)];
-    const randomR1 = hex[Math.floor(Math.random() * hex.length)];
-    const randomG0 = hex[Math.floor(Math.random() * hex.length)];
-    const randomG1 = hex[Math.floor(Math.random() * hex.length)];
-    const randomB0 = hex[Math.floor(Math.random() * hex.length)];
-    const randomB1 = hex[Math.floor(Math.random() * hex.length)];
+    const rdChar = () => hex[Math.floor(Math.random() * hex.length)];
     setColor(
-      "#" + randomR0 + randomR1 + randomG0 + randomG1 + randomB0 + randomB1
+      "#" + rdChar() + rdChar() + rdChar() + rdChar() + rdChar() + rdChar()
     );
   };
+
+  const lighten = () => {};
+  const shaden = () => {};
 
   const toggleBorder = () => {
     _div.style.borderColor =
@@ -48,6 +46,8 @@ function Cell(isRightest, isBottomest) {
     toggleBorder,
     getColor,
     setColor,
+    lighten,
+    shaden,
     random,
     getDiv,
   };
@@ -62,8 +62,10 @@ const color = (() => {
   const inputBg = document.getElementById("input__bg");
 
   const pen = () => inputPen.value;
+  const setPen = (v) => (inputPen.value = v);
   const bg = () => inputBg.value;
   return {
+    setPen,
     pen,
     bg,
   };
@@ -107,11 +109,11 @@ const board = (() => {
     for (const el of eleArr) {
       if (m === "clear") {
         el.setColor("transparent");
-        return;
+        continue;
       }
       if (m === "border") {
-        e.toggleBorder();
-        return;
+        el.toggleBorder();
+        continue;
       }
       //else mode = m and addEventListener base on mode
       mode = m;
@@ -126,40 +128,36 @@ const board = (() => {
           case "rainbow":
             el.random();
             break;
+          case "lighten":
+            el.lighten();
+            break;
+          case "shaden":
+            el.shaden();
+            break;
+          case "grabber":
+            grabber(el);
+            break;
+          case "filler":
+            filler(el);
+            break;
         }
       });
     }
   };
 
-  const normalDraw = () => {
-    for (let i = 0; i < eleArr.length; i++) {
-      const el = eleArr[i];
-      el.getDiv().addEventListener("mouseover", () => {
-        el.setColor(color.pen());
-      });
-    }
+  const grabber = (element) => {
+    //cancel mouseover event
+    element.getDiv().onmouseover = null;
+    //click a cell and change pen's color to cell's color (color picker)
+    element.getDiv().addEventListener("click", (e) => {
+      if (element.getColor() !== "transparent") {
+        color.setPen(element.getColor());
+        setMode("normal"); //then back to normal
+      }
+    });
   };
 
-  const eraser = () => {
-    for (const el of eleArr) {
-      el.getDiv().addEventListener("mouseover", () => {
-        el.setColor("transparent");
-      });
-    }
-  };
-  const rainbow = () => {};
-
-  const border = () => {
-    for (const el of eleArr) {
-      el.toggleBorder();
-    }
-  };
-
-  const clear = () => {
-    for (const el of eleArr) {
-      el.setColor("transparent");
-    }
-  };
+  const filler = () => {};
 
   const boardBg = (v) => {
     grid.style.backgroundColor = v;
@@ -168,13 +166,8 @@ const board = (() => {
   return {
     clickedFalse,
     clickedTrue,
-    normalDraw,
     createGrid,
-    rainbow,
     boardBg,
-    border,
-    eraser,
-    clear,
     setMode,
   };
 })();
@@ -186,11 +179,6 @@ const handler = (() => {
   const pen = document.getElementById("input__pen");
   const size = document.getElementById("input__size");
   const grid = document.getElementById("main__grid");
-  const clear = document.getElementById("button__clear");
-  const border = document.getElementById("button__border");
-  const eraser = document.getElementById("button__eraser");
-  const normal = document.getElementById("button__normal");
-  const rainbow = document.getElementById("button__rainbow");
   const modes = document.querySelectorAll("[data-mode]");
 
   bg.addEventListener("input", (e) => {
@@ -210,7 +198,7 @@ const handler = (() => {
   ok.addEventListener("click", () => {
     if (+size.value <= 80 && +size.value >= 2) {
       board.createGrid(+size.value);
-      board.normalDraw();
+      board.setMode("normal");
     }
   });
 
@@ -219,12 +207,12 @@ const handler = (() => {
 
   window.addEventListener("keyup", (e) => {
     if (e.key === "Enter") ok.click();
-    if (e.code === "Space") clear.click();
+    if (e.code === "Space") board.setMode("clear");
   });
 
   window.addEventListener("DOMContentLoaded", () => {
     board.createGrid(24);
-    board.normalDraw();
+    board.setMode("normal");
     // board.createGrid(+size.value);
   });
 })();
