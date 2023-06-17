@@ -10,6 +10,7 @@
   document.body.onmouseup = () => (mousedown = false);
   -app.js is my first try to do features of this app so the code is a little messy
   -and script.js is my second try
+  -comeback and do my third try after 6 months, my old code save on "old" branch on gitHub
 
 [View all my projects Live demo links](https://minhhoccode111.github.io/allProjectssLiveDemo/)
 
