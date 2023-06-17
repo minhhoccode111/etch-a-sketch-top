@@ -2,6 +2,7 @@
 
 // #################### CELL #################### //
 function Cell(isRightest, isBottomest) {
+  const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f"];
   let _color = "transparent";
 
   const _div = document.createElement("div");
@@ -26,6 +27,18 @@ function Cell(isRightest, isBottomest) {
     _div.style.backgroundColor = _color;
   };
 
+  const random = () => {
+    const randomR0 = hex[Math.floor(Math.random() * hex.length)];
+    const randomR1 = hex[Math.floor(Math.random() * hex.length)];
+    const randomG0 = hex[Math.floor(Math.random() * hex.length)];
+    const randomG1 = hex[Math.floor(Math.random() * hex.length)];
+    const randomB0 = hex[Math.floor(Math.random() * hex.length)];
+    const randomB1 = hex[Math.floor(Math.random() * hex.length)];
+    setColor(
+      "#" + randomR0 + randomR1 + randomG0 + randomG1 + randomB0 + randomB1
+    );
+  };
+
   const toggleBorder = () => {
     _div.style.borderColor =
       _div.style.borderColor === "gray" ? "transparent" : "gray";
@@ -35,9 +48,13 @@ function Cell(isRightest, isBottomest) {
     toggleBorder,
     getColor,
     setColor,
+    random,
     getDiv,
   };
 }
+
+// #################### UI #################### //
+const ui = (() => {})();
 
 // #################### COLOR #################### //
 const color = (() => {
@@ -57,6 +74,7 @@ const board = (() => {
   const grid = document.getElementById("main__grid");
 
   let eleArr = [];
+  let mode = "normal";
   let clicked = false;
 
   const clickedTrue = () => (clicked = true);
@@ -80,12 +98,42 @@ const board = (() => {
     eleArr[n * n - 1] = Cell(true, true);
 
     grid.style.gridTemplate = `repeat(${n},1fr)/repeat(${n},1fr)`;
+    for (const el of eleArr) {
+      grid.appendChild(el.getDiv());
+    }
+  };
+
+  const setMode = (m) => {
+    for (const el of eleArr) {
+      if (m === "clear") {
+        el.setColor("transparent");
+        return;
+      }
+      if (m === "border") {
+        e.toggleBorder();
+        return;
+      }
+      //else mode = m and addEventListener base on mode
+      mode = m;
+      el.getDiv().addEventListener("mouseover", (e) => {
+        switch (mode) {
+          case "normal":
+            el.setColor(color.pen());
+            break;
+          case "eraser":
+            el.setColor("transparent");
+            break;
+          case "rainbow":
+            el.random();
+            break;
+        }
+      });
+    }
   };
 
   const normalDraw = () => {
     for (let i = 0; i < eleArr.length; i++) {
       const el = eleArr[i];
-      grid.appendChild(el.getDiv());
       el.getDiv().addEventListener("mouseover", () => {
         el.setColor(color.pen());
       });
@@ -99,8 +147,9 @@ const board = (() => {
       });
     }
   };
+  const rainbow = () => {};
 
-  const toggleBorder = () => {
+  const border = () => {
     for (const el of eleArr) {
       el.toggleBorder();
     }
@@ -117,42 +166,46 @@ const board = (() => {
   };
 
   return {
-    toggleBorder,
-    createGrid,
-    normalDraw,
-    clickedTrue,
     clickedFalse,
-    clear,
+    clickedTrue,
+    normalDraw,
+    createGrid,
+    rainbow,
     boardBg,
+    border,
     eraser,
+    clear,
+    setMode,
   };
 })();
 
 // #################### HANDLER #################### //
 const handler = (() => {
-  const size = document.getElementById("input__size");
-  const border = document.getElementById("button__border");
   const ok = document.getElementById("button__size");
-  const grid = document.getElementById("main__grid");
   const bg = document.getElementById("input__bg");
   const pen = document.getElementById("input__pen");
+  const size = document.getElementById("input__size");
+  const grid = document.getElementById("main__grid");
   const clear = document.getElementById("button__clear");
+  const border = document.getElementById("button__border");
   const eraser = document.getElementById("button__eraser");
   const normal = document.getElementById("button__normal");
+  const rainbow = document.getElementById("button__rainbow");
+  const modes = document.querySelectorAll("[data-mode]");
 
   bg.addEventListener("input", (e) => {
     board.boardBg(color.bg());
   });
 
-  pen.addEventListener("change", board.normalDraw);
+  pen.addEventListener("change", (e) => {
+    board.setMode("normal");
+  });
 
-  border.addEventListener("click", board.toggleBorder);
-
-  clear.addEventListener("click", board.clear);
-
-  eraser.addEventListener("click", board.eraser);
-
-  normal.addEventListener("click", board.normalDraw);
+  modes.forEach((el) =>
+    el.addEventListener("click", (e) => {
+      board.setMode(e.target.textContent);
+    })
+  );
 
   ok.addEventListener("click", () => {
     if (+size.value <= 80 && +size.value >= 2) {
