@@ -21,6 +21,9 @@ function Cell(isRightest, isBottomest) {
     "f",
   ];
   let _color = "transparent";
+  let neighbors;
+  const setNeighbors = (v) => (neighbors = v);
+  const getNeighbors = () => neighbors;
 
   const _div = document.createElement("div");
   _div.style.backgroundColor = "transparent";
@@ -29,10 +32,10 @@ function Cell(isRightest, isBottomest) {
   _div.style.borderStyle = "solid";
 
   if (isRightest) {
-    _div.style.borderRightWidth = "0";
+    _div.style.borderWidth = "0 0 1px 0";
   }
   if (isBottomest) {
-    _div.style.borderBottomWidth = "0";
+    _div.style.borderWidth = "0 1px 0 0";
   }
 
   const getDiv = () => _div;
@@ -57,13 +60,13 @@ function Cell(isRightest, isBottomest) {
       return;
     }
     let lightenColor = _color.split("").reduce((total, current) => {
-      console.log(typeof current);
       if (current === "#" || current === "f") {
         return total + current;
       }
       current = hex[hex.indexOf(current) + 1];
       return total + current;
     }, "");
+    console.log(lightenColor);
     setColor(lightenColor);
   };
   const shaden = () => {
@@ -88,6 +91,8 @@ function Cell(isRightest, isBottomest) {
   };
 
   return {
+    setNeighbors,
+    getNeighbors,
     toggleBorder,
     getColor,
     setColor,
@@ -122,36 +127,81 @@ const board = (() => {
 
   let eleArr = [];
   let mode = "normal";
-  let clicked = false;
-
-  const clickedTrue = () => (clicked = true);
-  const clickedFalse = () => (clicked = false);
 
   const createGrid = (n) => {
     grid.innerHTML = "";
     eleArr = [];
+
     for (let i = 0; i < n * n; i++) {
+      //last cell will have no border
+      if (i === n * n - 1) {
+        eleArr[i] = Cell(true, true);
+      }
+      // right-est
       if ((i + 1) % n === 0) {
-        //except last index
-        eleArr[i] = Cell(true, false); //the right-est
+        eleArr[i] = Cell(true, false);
         continue;
       }
-      if (i >= n * n - n) {
-        eleArr[i] = Cell(false, true); //the bottom-est
+      //bot-est
+      if (i >= n * n - n && i < n * n - 1) {
+        eleArr[i] = Cell(false, true);
         continue;
       }
       eleArr[i] = Cell(false, false);
     }
-    eleArr[n * n - 1] = Cell(true, true);
 
     grid.style.gridTemplate = `repeat(${n},1fr)/repeat(${n},1fr)`;
-    for (const el of eleArr) {
-      grid.appendChild(el.getDiv());
+    for (let i = 0; i < eleArr.length; i++) {
+      grid.appendChild(eleArr[i].getDiv());
+      if (i === 0) {
+        eleArr[i].setNeighbors([eleArr[i + 1], eleArr[i + n]]);
+        continue;
+      }
+      if (i === n - 1) {
+        eleArr[i].setNeighbors([eleArr[i - 1], eleArr[i + n]]);
+        continue;
+      }
+      if (i === n * n - n) {
+        eleArr[i].setNeighbors([eleArr[i + 1], eleArr[i - n]]);
+        continue;
+      }
+      if (i === n * n - 1) {
+        eleArr[i].setNeighbors([eleArr[i - 1], eleArr[i - n]]);
+        continue;
+      }
+      //top-est
+      if (i > 0 && i < n - 1) {
+        eleArr[i].setNeighbors([eleArr[i - 1], eleArr[i + 1], eleArr[i + n]]);
+        continue;
+      }
+      //left-est
+      if (i % n === 0) {
+        eleArr[i].setNeighbors([eleArr[i + 1], eleArr[i + n], eleArr[i - n]]);
+        continue;
+      }
+      //right-est
+      if ((i + 1) % n === 0) {
+        eleArr[i].setNeighbors([eleArr[i - 1], eleArr[i + n], eleArr[i - n]]);
+        continue;
+      }
+      //bot-est
+      if (i > n * n - n && i < n * n - 1) {
+        eleArr[i].setNeighbors([eleArr[i - 1], eleArr[i - 1], eleArr[i - n]]);
+        continue;
+      }
+      //else
+      eleArr[i].setNeighbors([
+        eleArr[i - 1],
+        eleArr[i + 1],
+        eleArr[i - n],
+        eleArr[i + n],
+      ]);
     }
   };
 
   const setMode = (m) => {
-    for (const el of eleArr) {
+    for (let i = 0; i < eleArr.length; i++) {
+      const el = eleArr[i];
       if (m === "clear") {
         el.setColor("transparent");
         continue;
@@ -191,26 +241,39 @@ const board = (() => {
   };
 
   const grabber = (element) => {
-    //cancel mouseover event
     element.getDiv().onmouseover = null;
-    //click a cell and change pen's color to cell's color (color picker)
     element.getDiv().addEventListener("click", (e) => {
       if (element.getColor() !== "transparent") {
         color.setPen(element.getColor());
-        setMode("normal"); //then back to normal
+        setMode("normal");
       }
     });
   };
 
-  const filler = () => {};
+  const filler = (element) => {
+    const currentColor = element.getColor();
+    element.getDiv().onmouseover = null;
+
+    const fill = (el) => {
+      const neighbors = el.getNeighbors();
+      console.log(neighbors);
+      el.setColor(color.pen());
+      for (const neighbor of neighbors) {
+        if (neighbor.getColor() !== currentColor) continue;
+        fill(neighbor);
+      }
+    };
+
+    element.getDiv().addEventListener("click", () => {
+      fill(element);
+    });
+  };
 
   const boardBg = (v) => {
     grid.style.backgroundColor = v;
   };
 
   return {
-    clickedFalse,
-    clickedTrue,
     createGrid,
     boardBg,
     setMode,
@@ -261,8 +324,8 @@ const handler = (() => {
   });
 
   window.addEventListener("DOMContentLoaded", () => {
-    board.createGrid(24);
+    board.createGrid(+size.value);
     board.setMode("normal");
-    // board.createGrid(+size.value);
+    board.boardBg(color.bg());
   });
 })();
