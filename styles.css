@@ -26,6 +26,9 @@ button:hover {
   color: white;
   background-color: black;
 }
+h2 {
+  font-size: 2rem;
+}
 input {
   font-size: 2rem;
 }
@@ -62,6 +65,19 @@ li {
 #header__title {
   text-align: center;
   text-transform: uppercase;
+  position: relative;
+}
+#header__title__icon {
+  font-size: 3rem;
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background-color: #ffffff;
+  padding: 0.8rem;
+  color: rgb(211, 211, 126);
+  cursor: pointer;
 }
 #main {
   width: 100%;

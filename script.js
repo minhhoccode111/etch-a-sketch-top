@@ -2,7 +2,24 @@
 
 // #################### CELL #################### //
 function Cell(isRightest, isBottomest) {
-  const hex = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f"];
+  const hex = [
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+  ];
   let _color = "transparent";
 
   const _div = document.createElement("div");
@@ -34,8 +51,36 @@ function Cell(isRightest, isBottomest) {
     );
   };
 
-  const lighten = () => {};
-  const shaden = () => {};
+  const lighten = () => {
+    if (_color === "transparent") {
+      setColor(color.bg());
+      return;
+    }
+    let lightenColor = _color.split("").reduce((total, current) => {
+      console.log(typeof current);
+      if (current === "#" || current === "f") {
+        return total + current;
+      }
+      current = hex[hex.indexOf(current) + 1];
+      return total + current;
+    }, "");
+    setColor(lightenColor);
+  };
+  const shaden = () => {
+    if (_color === "transparent") {
+      setColor(color.bg());
+      return;
+    }
+    let shadenColor = _color.split("").reduce((total, current) => {
+      console.log(typeof current);
+      if (current === "#" || current === "0") {
+        return total + current;
+      }
+      current = hex[hex.indexOf(current) - 1];
+      return total + current;
+    }, "");
+    setColor(shadenColor);
+  };
 
   const toggleBorder = () => {
     _div.style.borderColor =
@@ -174,11 +219,12 @@ const board = (() => {
 
 // #################### HANDLER #################### //
 const handler = (() => {
-  const ok = document.getElementById("button__size");
   const bg = document.getElementById("input__bg");
+  const ok = document.getElementById("button__size");
   const pen = document.getElementById("input__pen");
-  const size = document.getElementById("input__size");
   const grid = document.getElementById("main__grid");
+  const size = document.getElementById("input__size");
+  const icon = document.getElementById("header__title__icon");
   const modes = document.querySelectorAll("[data-mode]");
 
   bg.addEventListener("input", (e) => {
@@ -204,6 +250,10 @@ const handler = (() => {
 
   grid.addEventListener("mousedown", board.clickedTrue);
   grid.addEventListener("mouseup", board.clickedFalse);
+
+  icon.addEventListener("click", (e) => {
+    alert("Enter to set the size input and Space to clear the board");
+  });
 
   window.addEventListener("keyup", (e) => {
     if (e.key === "Enter") ok.click();
