@@ -104,7 +104,13 @@ function Cell(isRightest, isBottomest) {
 }
 
 // #################### UI #################### //
-const ui = (() => {})();
+const ui = (() => {
+  const mess = document.getElementById("main__info__message_0");
+  const modes = (m) => {
+    mess.textContent = `Mode: ${m}`;
+  };
+  return { modes };
+})();
 
 // #################### COLOR #################### //
 const color = (() => {
@@ -212,6 +218,7 @@ const board = (() => {
       }
       //else mode = m and addEventListener base on mode
       mode = m;
+      ui.modes(mode);
       el.getDiv().addEventListener("mouseover", (e) => {
         switch (mode) {
           case "normal":
@@ -256,7 +263,6 @@ const board = (() => {
 
     const fill = (el) => {
       const neighbors = el.getNeighbors();
-      console.log(neighbors);
       el.setColor(color.pen());
       for (const neighbor of neighbors) {
         if (neighbor.getColor() !== currentColor) continue;
