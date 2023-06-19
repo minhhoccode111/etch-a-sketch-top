@@ -66,7 +66,6 @@ function Cell(isRightest, isBottomest) {
       current = hex[hex.indexOf(current) + 1];
       return total + current;
     }, "");
-    console.log(lightenColor);
     setColor(lightenColor);
   };
   const shaden = () => {
@@ -75,7 +74,6 @@ function Cell(isRightest, isBottomest) {
       return;
     }
     let shadenColor = _color.split("").reduce((total, current) => {
-      console.log(typeof current);
       if (current === "#" || current === "0") {
         return total + current;
       }
