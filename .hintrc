@@ -11,6 +11,7 @@
         ]
       }
     ],
-    "meta-viewport": "off"
+    "meta-viewport": "off",
+    "disown-opener": "off"
   }
 }
