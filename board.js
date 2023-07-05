@@ -79,14 +79,7 @@ const setMode = (m) => {
     //else mode = m and addEventListener base on mode
     mode = m;
     displayModes(mode);
-    if (m === 'grabber') {
-      grabber(el);
-      continue;
-    }
-    if (m === 'filler') {
-      filler(el);
-      continue;
-    }
+
     el.getDiv().addEventListener('mouseover', (e) => {
       switch (mode) {
         case 'normal':
@@ -104,6 +97,12 @@ const setMode = (m) => {
         case 'shaden':
           el.shaden();
           break;
+        case 'grabber':
+          grabber(el);
+          break;
+        case 'filler':
+          filler(el);
+          break;
       }
     });
   }
@@ -119,20 +118,21 @@ function grabber(element) {
 }
 
 function filler(element) {
+  const currentColor = element.getColor();
+  element.getDiv().onmouseover = null;
+
+  const fill = (el) => {
+    const neighbors = el.getNeighbors();
+    el.setColor(penColor());
+    for (const neighbor of neighbors) {
+      if (neighbor.getColor() !== currentColor) continue;
+      fill(neighbor);
+    }
+  };
+
   element.getDiv().addEventListener('click', () => {
     fill(element);
   });
-
-  function fill(el) {
-    const current = el.getColor();
-    const around = el.getNeighbors();
-    el.setColor(penColor());
-    for (let i = 0; i < around.length; i++) {
-      if (around[i].getColor() === 'transparent') {
-        fill(around[i]);
-      }
-    }
-  }
 }
 
 const boardBg = (v) => {

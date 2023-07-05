@@ -1,23 +1,6 @@
 // #################### CELL #################### //
 function Cell(isRightest, isBottomest) {
-  const hex = [
-    '0',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    'a',
-    'b',
-    'c',
-    'd',
-    'e',
-    'f',
-  ];
+  const hex = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
   let _color = 'transparent';
   let neighbors;
   const setNeighbors = (v) => (neighbors = v);
@@ -47,9 +30,7 @@ function Cell(isRightest, isBottomest) {
 
   const random = () => {
     const rdChar = () => hex[Math.floor(Math.random() * hex.length)];
-    setColor(
-      '#' + rdChar() + rdChar() + rdChar() + rdChar() + rdChar() + rdChar()
-    );
+    setColor('#' + rdChar() + rdChar() + rdChar() + rdChar() + rdChar() + rdChar());
   };
 
   const lighten = () => {
@@ -82,8 +63,7 @@ function Cell(isRightest, isBottomest) {
   };
 
   const toggleBorder = () => {
-    _div.style.borderColor =
-      _div.style.borderColor === 'gray' ? 'transparent' : 'gray';
+    _div.style.borderColor = _div.style.borderColor === 'gray' ? 'transparent' : 'gray';
   };
 
   return {
@@ -188,16 +168,11 @@ const board = (() => {
       }
       //bot-est
       if (i > n * n - n && i < n * n - 1) {
-        eleArr[i].setNeighbors([eleArr[i - 1], eleArr[i - 1], eleArr[i - n]]);
+        eleArr[i].setNeighbors([eleArr[i - 1], eleArr[i + 1], eleArr[i - n]]);
         continue;
       }
       //else
-      eleArr[i].setNeighbors([
-        eleArr[i - 1],
-        eleArr[i + 1],
-        eleArr[i - n],
-        eleArr[i + n],
-      ]);
+      eleArr[i].setNeighbors([eleArr[i - 1], eleArr[i + 1], eleArr[i - n], eleArr[i + n]]);
     }
   };
 
