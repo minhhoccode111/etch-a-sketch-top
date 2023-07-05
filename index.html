@@ -18,19 +18,19 @@
         <div id="main__setting">
           <div id="main__set__pen" class="left-stretch main__set__start" title="Choose color for you pen!">
             <label id="label__pen" for="input__pen ">
-              <input type="color" id="input__pen" name="input__pen" placeholder="Your pen's color" value="#000000" class="input__pen" />
+              <input type="color" id="input__pen" name="input__pen" placeholder="Your pen's color" pattern="#[0-9a-fA-F]{6}" value="#000000" class="input__pen" />
               <span>Pen's color</span>
             </label>
           </div>
           <div id="main__set__bg" class="left-stretch main__set__start" title="Choose color for you background!">
             <label id="label__bg" for="input__bg">
-              <input type="color" id="input__bg" name="input__bg" placeholder="Your background's color" value="#cccccc" class="input__bg" />
+              <input type="color" id="input__bg" name="input__bg" placeholder="Your background's color" pattern="#[0-9a-fA-F]{6}" value="#cccccc" class="input__bg" />
               <span>Background's color</span>
             </label>
           </div>
           <div id="main__set__size" class="left-stretch main__set__start" title="Input your grid size. Between 2 and 80.">
             <label id="label__size" for="input__size">
-              <input type="number" min="1" max="80" value="8" class="input__size" name="input__size" id="input__size" placeholder="2 to 80" />
+              <input type="number" min="1" max="80" value="32" class="input__size" name="input__size" id="input__size" placeholder="2 to 80" />
               <button id="button__size" title="Click to submit your size changes!">ok</button>
               <span id="span__size" class="center">Size: 2 => 80</span>
             </label>
@@ -64,8 +64,8 @@
           </div>
         </div>
         <div id="main__info">
-          <h2 id="main__info__message_0"></h2>
-          <h2 id="main__info__message_1"></h2>
+          <h2 id="main__info__message_0">Mode: normal</h2>
+          <h2 id="main__info__message_1">Pen color: #000000</h2>
         </div>
         <div id="main__grid" title="Mouse down to draw!"></div>
       </main>
@@ -76,7 +76,6 @@
         </p>
       </footer>
     </div>
-    <!-- src="./script.js" -->
     <script src="./script.js" type="module" defer></script>
   </body>
 </html>
