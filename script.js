@@ -1,7 +1,7 @@
 // #################### CELL #################### //
 const hex = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
 
-function Cell(isRightest, isBottomest) {
+const Cell = (isRightest, isBottomest) => {
   let _color = 'transparent';
   let _neighbors;
   const setNeighbors = (v) => (_neighbors = v);
@@ -58,7 +58,6 @@ function Cell(isRightest, isBottomest) {
     }
     let shadenColor = _color.split('').reduce((total, current) => {
       const lower = current.toLowerCase();
-
       if (current === '#' || lower === '0') {
         return total + lower;
       }
@@ -82,7 +81,7 @@ function Cell(isRightest, isBottomest) {
     random,
     getDiv,
   };
-}
+};
 
 // #################### UI #################### //
 const ui = (() => {
@@ -125,10 +124,11 @@ const board = (() => {
   const createGrid = (n) => {
     _grid.innerHTML = '';
     eleArr = [];
+    const l = n * n;
 
-    for (let i = 0; i < n * n; i++) {
+    for (let i = 0; i < l; i++) {
       //last cell will have no border
-      if (i === n * n - 1) {
+      if (i === l - 1) {
         eleArr[i] = Cell(true, true);
         continue;
       }
@@ -138,7 +138,7 @@ const board = (() => {
         continue;
       }
       //bot-est
-      if (i >= n * n - n && i < n * n - 1) {
+      if (i >= l - n && i < l - 1) {
         eleArr[i] = Cell(false, true);
         continue;
       }
@@ -146,7 +146,7 @@ const board = (() => {
     }
 
     _grid.style.gridTemplate = `repeat(${n},1fr)/repeat(${n},1fr)`;
-    for (let i = 0; i < eleArr.length; i++) {
+    for (let i = 0; i < l; i++) {
       const current = eleArr[i];
       const top = eleArr[i - n];
       const bottom = eleArr[i + n];
@@ -161,11 +161,11 @@ const board = (() => {
         current.setNeighbors([left, bottom]);
         continue;
       }
-      if (i === n * n - n) {
+      if (i === l - n) {
         current.setNeighbors([right, top]);
         continue;
       }
-      if (i === n * n - 1) {
+      if (i === l - 1) {
         current.setNeighbors([left, top]);
         continue;
       }
@@ -185,7 +185,7 @@ const board = (() => {
         continue;
       }
       //bot-est
-      if (i > n * n - n && i < n * n - 1) {
+      if (i > l - n && i < l - 1) {
         current.setNeighbors([left, right, top]);
         continue;
       }
@@ -300,8 +300,9 @@ const handler = (() => {
   );
 
   ok.addEventListener('click', () => {
-    if (+size.value <= 80 && +size.value >= 2) {
-      board.createGrid(+size.value);
+    const sizeValue = +size.value;
+    if (sizeValue <= 80 && sizeValue >= 2) {
+      board.createGrid(sizeValue);
       board.setMode('normal');
     }
   });
