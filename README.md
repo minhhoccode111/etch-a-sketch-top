@@ -1,4 +1,4 @@
-# etch-a-sketch
+# Etch A Sketch The Odin Project
 
 - Practice JS DOM and CSS
 - features idea and layout, UI idea from <a href="https://github.com/bscottnz/esketch">bscottnz</a>, he did it so well, thank him a lot
@@ -15,6 +15,6 @@
   - attribute `pattern="#[0-9a-fA-F]{6}"` to strict with value type of input type color
   - when we use `textContent` of a element to pass as argument to a javascript function there may be some unexpected behavior cause when html file auto line break (this happen when an element has so many attributes) and the `textContent` of it become `   some text   ` instead of `some text` and extremely hard to debug. So remember to use element's `data` attribute to pass values in javaScript function as argument to make your life easier.
 
-[View all my projects Live demo links](https://minhhoccode111.github.io/allProjectssLiveDemo/)
+[View all projects' live demos](https://minhhoccode111.github.io/all-projects-live-demos/) 
 
-[View this project Live demo](https://minhhoccode111.github.io/etchASketchTOP/)
+[Etch A Sketch TOP](https://minhhoccode111.github.io/etch-a-sketch-top/)
